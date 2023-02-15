@@ -1,0 +1,5 @@
+helmCharts:
+  - repo: https://fluent.github.io/helm-charts
+    name: fluent-bit
+    version: 0.20.8
+    releaseName: foobar

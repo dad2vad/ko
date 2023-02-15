@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@kosko/env": "*",
+    "@kosko/test-utils": "*",
+    "execa": "*",
+    "kubernetes-models": "*"
+  }
+}

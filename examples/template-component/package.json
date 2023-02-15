@@ -1,0 +1,9 @@
+{
+  "name": "@kosko-example/template-component",
+  "version": "0.0.5",
+  "private": true,
+  "dependencies": {
+    "@kosko/template": "workspace:^",
+    "kubernetes-models": "^4.1.0"
+  }
+}

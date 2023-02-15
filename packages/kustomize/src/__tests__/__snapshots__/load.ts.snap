@@ -1,0 +1,463 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`helm chart 1`] = `
+[
+  {
+    "apiVersion": "v1",
+    "kind": "ServiceAccount",
+    "metadata": {
+      "labels": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
+      },
+      "name": "foobar-fluent-bit",
+    },
+  },
+  {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": {
+      "labels": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
+      },
+      "name": "foobar-fluent-bit",
+    },
+    "rules": [
+      {
+        "apiGroups": [
+          "",
+        ],
+        "resources": [
+          "namespaces",
+          "pods",
+        ],
+        "verbs": [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+    ],
+  },
+  {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": {
+      "labels": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
+      },
+      "name": "foobar-fluent-bit",
+    },
+    "roleRef": {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "foobar-fluent-bit",
+    },
+    "subjects": [
+      {
+        "kind": "ServiceAccount",
+        "name": "foobar-fluent-bit",
+        "namespace": "default",
+      },
+    ],
+  },
+  {
+    "apiVersion": "v1",
+    "data": {
+      "custom_parsers.conf": "[PARSER]
+    Name docker_no_time
+    Format json
+    Time_Keep Off
+    Time_Key time
+    Time_Format %Y-%m-%dT%H:%M:%S.%L
+",
+      "fluent-bit.conf": "[SERVICE]
+    Daemon Off
+    Flush 1
+    Log_Level info
+    Parsers_File parsers.conf
+    Parsers_File custom_parsers.conf
+    HTTP_Server On
+    HTTP_Listen 0.0.0.0
+    HTTP_Port 2020
+    Health_Check On
+
+[INPUT]
+    Name tail
+    Path /var/log/containers/*.log
+    multiline.parser docker, cri
+    Tag kube.*
+    Mem_Buf_Limit 5MB
+    Skip_Long_Lines On
+
+[INPUT]
+    Name systemd
+    Tag host.*
+    Systemd_Filter _SYSTEMD_UNIT=kubelet.service
+    Read_From_Tail On
+
+[FILTER]
+    Name kubernetes
+    Match kube.*
+    Merge_Log On
+    Keep_Log Off
+    K8S-Logging.Parser On
+    K8S-Logging.Exclude On
+
+[OUTPUT]
+    Name es
+    Match kube.*
+    Host elasticsearch-master
+    Logstash_Format On
+    Retry_Limit False
+
+[OUTPUT]
+    Name es
+    Match host.*
+    Host elasticsearch-master
+    Logstash_Format On
+    Logstash_Prefix node
+    Retry_Limit False
+",
+    },
+    "kind": "ConfigMap",
+    "metadata": {
+      "labels": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
+      },
+      "name": "foobar-fluent-bit",
+    },
+  },
+  {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": {
+      "labels": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
+      },
+      "name": "foobar-fluent-bit",
+    },
+    "spec": {
+      "ports": [
+        {
+          "name": "http",
+          "port": 2020,
+          "protocol": "TCP",
+          "targetPort": "http",
+        },
+      ],
+      "selector": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/name": "fluent-bit",
+      },
+      "type": "ClusterIP",
+    },
+  },
+  {
+    "apiVersion": "apps/v1",
+    "kind": "DaemonSet",
+    "metadata": {
+      "labels": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
+      },
+      "name": "foobar-fluent-bit",
+    },
+    "spec": {
+      "selector": {
+        "matchLabels": {
+          "app.kubernetes.io/instance": "foobar",
+          "app.kubernetes.io/name": "fluent-bit",
+        },
+      },
+      "template": {
+        "metadata": {
+          "annotations": {
+            "checksum/config": "90ed4d580f6a4f13b9c66e0a42af506b4606da3d531bb4ace5dd2cc8ef29d7b3",
+            "checksum/luascripts": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          },
+          "labels": {
+            "app.kubernetes.io/instance": "foobar",
+            "app.kubernetes.io/name": "fluent-bit",
+          },
+        },
+        "spec": {
+          "containers": [
+            {
+              "image": "cr.fluentbit.io/fluent/fluent-bit:1.9.8",
+              "imagePullPolicy": "Always",
+              "livenessProbe": {
+                "httpGet": {
+                  "path": "/",
+                  "port": "http",
+                },
+              },
+              "name": "fluent-bit",
+              "ports": [
+                {
+                  "containerPort": 2020,
+                  "name": "http",
+                  "protocol": "TCP",
+                },
+              ],
+              "readinessProbe": {
+                "httpGet": {
+                  "path": "/api/v1/health",
+                  "port": "http",
+                },
+              },
+              "volumeMounts": [
+                {
+                  "mountPath": "/fluent-bit/etc/fluent-bit.conf",
+                  "name": "config",
+                  "subPath": "fluent-bit.conf",
+                },
+                {
+                  "mountPath": "/fluent-bit/etc/custom_parsers.conf",
+                  "name": "config",
+                  "subPath": "custom_parsers.conf",
+                },
+                {
+                  "mountPath": "/var/log",
+                  "name": "varlog",
+                },
+                {
+                  "mountPath": "/var/lib/docker/containers",
+                  "name": "varlibdockercontainers",
+                  "readOnly": true,
+                },
+                {
+                  "mountPath": "/etc/machine-id",
+                  "name": "etcmachineid",
+                  "readOnly": true,
+                },
+              ],
+            },
+          ],
+          "dnsPolicy": "ClusterFirst",
+          "hostNetwork": false,
+          "serviceAccountName": "foobar-fluent-bit",
+          "volumes": [
+            {
+              "configMap": {
+                "name": "foobar-fluent-bit",
+              },
+              "name": "config",
+            },
+            {
+              "hostPath": {
+                "path": "/var/log",
+              },
+              "name": "varlog",
+            },
+            {
+              "hostPath": {
+                "path": "/var/lib/docker/containers",
+              },
+              "name": "varlibdockercontainers",
+            },
+            {
+              "hostPath": {
+                "path": "/etc/machine-id",
+                "type": "File",
+              },
+              "name": "etcmachineid",
+            },
+          ],
+        },
+      },
+    },
+  },
+  {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+      "annotations": {
+        "helm.sh/hook": "test-success",
+      },
+      "labels": {
+        "app.kubernetes.io/instance": "foobar",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "fluent-bit",
+        "app.kubernetes.io/version": "1.9.8",
+        "helm.sh/chart": "fluent-bit-0.20.8",
+      },
+      "name": "foobar-fluent-bit-test-connection",
+    },
+    "spec": {
+      "containers": [
+        {
+          "args": [
+            "foobar-fluent-bit:2020",
+          ],
+          "command": [
+            "wget",
+          ],
+          "image": "busybox:latest",
+          "imagePullPolicy": "Always",
+          "name": "wget",
+        },
+      ],
+      "restartPolicy": "Never",
+    },
+  },
+]
+`;
+
+exports[`local path 1`] = `
+[
+  {
+    "apiVersion": "v1",
+    "data": {
+      "altGreeting": "Good Morning!",
+      "enableRisky": "false",
+    },
+    "kind": "ConfigMap",
+    "metadata": {
+      "labels": {
+        "app": "hello",
+      },
+      "name": "the-map",
+    },
+  },
+  {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": {
+      "labels": {
+        "app": "hello",
+      },
+      "name": "the-service",
+    },
+    "spec": {
+      "ports": [
+        {
+          "port": 8666,
+          "protocol": "TCP",
+          "targetPort": 8080,
+        },
+      ],
+      "selector": {
+        "app": "hello",
+        "deployment": "hello",
+      },
+      "type": "LoadBalancer",
+    },
+  },
+  {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+      "labels": {
+        "app": "hello",
+      },
+      "name": "the-deployment",
+    },
+    "spec": {
+      "replicas": 3,
+      "selector": {
+        "matchLabels": {
+          "app": "hello",
+          "deployment": "hello",
+        },
+      },
+      "template": {
+        "metadata": {
+          "labels": {
+            "app": "hello",
+            "deployment": "hello",
+          },
+        },
+        "spec": {
+          "containers": [
+            {
+              "command": [
+                "/hello",
+                "--port=8080",
+                "--enableRiskyFeature=$(ENABLE_RISKY)",
+              ],
+              "env": [
+                {
+                  "name": "ALT_GREETING",
+                  "valueFrom": {
+                    "configMapKeyRef": {
+                      "key": "altGreeting",
+                      "name": "the-map",
+                    },
+                  },
+                },
+                {
+                  "name": "ENABLE_RISKY",
+                  "valueFrom": {
+                    "configMapKeyRef": {
+                      "key": "enableRisky",
+                      "name": "the-map",
+                    },
+                  },
+                },
+              ],
+              "image": "monopole/hello:1",
+              "name": "the-container",
+              "ports": [
+                {
+                  "containerPort": 8080,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`remote url 1`] = `
+[
+  {
+    "apiVersion": "v1",
+    "data": {
+      "altGreeting": "Good Morning!",
+      "enableRisky": "false",
+    },
+    "kind": "ConfigMap",
+    "metadata": {
+      "name": "remote-cm",
+    },
+  },
+]
+`;
+
+exports[`when buildCommand is given command exists 1`] = `
+[
+  {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+      "name": "test",
+    },
+  },
+]
+`;

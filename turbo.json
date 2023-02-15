@@ -1,0 +1,15 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "out/**"]
+    }
+  },
+  "globalDependencies": [
+    "api-extractor.json",
+    "tsconfig.json",
+    "tsconfig.build.json"
+  ],
+  "globalEnv": ["DENO_BUILD_PROD"]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@kosko/test-utils",
+  "version": "0.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=14.18.0"
+  },
+  "main": "dist/index.node.cjs",
+  "module": "dist/index.node.mjs",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts"
+  },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "deno": "./dist/index.deno.mjs",
+    "node": {
+      "import": "./dist/index.node.mjs",
+      "require": "./dist/index.node.cjs"
+    },
+    "import": "./dist/index.base.mjs",
+    "require": "./dist/index.node.cjs"
+  },
+  "dependencies": {
+    "execa": "^5.1.1",
+    "temp-dir": "^2.0.0",
+    "tmp": "^0.2.1",
+    "tmp-promise": "^3.0.3"
+  },
+  "devDependencies": {
+    "@kosko/build-scripts": "workspace:^",
+    "@types/tmp": "^0.2.3"
+  }
+}

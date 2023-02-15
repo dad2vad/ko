@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when validate is false should print the manifest 1`] = `
+"apiVersion: v1
+kind: Pod
+metadata:
+  name: foo
+spec: {}"
+`;
+
+exports[`when validate is not set should print the error 1`] = `
+"[1mcomponents/foo.js[22m - 1 error
+
+  [31m✖ ResolveError: Validation error[39m
+    Kind: v1/Pod
+    Name: foo
+
+      /spec must have required property 'containers'
+
+[31merror[39m - Generate failed (Total 1 error)"
+`;
+
+exports[`when validate is true should print the error 1`] = `
+"[1mcomponents/foo.js[22m - 1 error
+
+  [31m✖ ResolveError: Validation error[39m
+    Kind: v1/Pod
+    Name: foo
+
+      /spec must have required property 'containers'
+
+[31merror[39m - Generate failed (Total 1 error)"
+`;

@@ -1,0 +1,77 @@
+---
+title: Loading Kustomize
+---
+
+import DocCardList from "@theme/DocCardList";
+
+Kosko supports loading manifests from Kustomize files. You have to install either [`kustomize`](https://kubectl.docs.kubernetes.io/installation/kustomize/) or [`kubectl`](https://kubectl.docs.kubernetes.io/installation/kubectl/) CLI before using this package.
+
+`@kosko/kustomize` uses the `kustomize build` command to generate Kubernetes manifests. Most options of `kustomize build` command are supported. See [API documentation](api/kustomize.md) for available options.
+
+Under the hood, `@kosko/kustomize` uses `@kosko/yaml` to load YAML, which means the `loadKustomize` function supports all options of the `loadString` function. See [loading Kubernetes YAML](loading-kubernetes-yaml.mdx) for more details.
+
+## Install
+
+Install `@kosko/kustomize`.
+
+```shell
+npm install @kosko/kustomize
+```
+
+## Load from a local directory
+
+Load Kubernetes manifests from a local directory which contains a `kustomization.yaml` file. For example, you can use `__dirname` to load manifests from the current directory.
+
+```ts ts2js
+import { loadKustomize } from "@kosko/kustomize";
+
+loadKustomize({
+  path: "./dir"
+});
+```
+
+## Load from a URL
+
+You can also load manifests from a URL. See [Kustomize docs](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/resource/) for supported URL formats.
+
+```ts ts2js
+import { loadKustomize } from "@kosko/kustomize";
+
+loadKustomize({
+  path: "github.com/kubernetes-sigs/kustomize/examples/multibases?ref=v1.0.6"
+});
+```
+
+## Specify the Build Command
+
+By default, `loadKustomize` function uses `kustomize build` command to generate Kubernetes manifests, and fallbacks to `kubectl kustomize` command if `kustomize` CLI is not installed.
+
+You can also customize the build command with the `buildCommand` option if `kustomize` or `kubectl` is not present in your `PATH`.
+
+```ts ts2js
+import { loadKustomize } from "@kosko/kustomize";
+
+loadKustomize({
+  path: "./dir",
+  buildCommand: ["./path/to/kustomize", "build"]
+});
+```
+
+## Related
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "@kosko/kustomize",
+      href: "/docs/api/kustomize",
+      docId: "api/kustomize"
+    },
+    {
+      type: "link",
+      label: "Loading Kubernetes YAML",
+      href: "/docs/components/loading-kubernetes-yaml",
+      docId: "components/loading-kubernetes-yaml"
+    }
+  ]}
+/>

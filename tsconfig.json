@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/node14/tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "esnext",
+    "resolveJsonModule": true
+  },
+  "exclude": [
+    "internal/*/dist",
+    "packages/*/dist",
+    "packages/cli/templates",
+    "examples",
+    "website"
+  ]
+}

@@ -1,0 +1,29 @@
+name: Snapshot Release
+on:
+  push:
+    branches:
+      - snapshot
+      - snapshots/**
+  pull_request:
+
+jobs:
+  release:
+    runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'snapshot') }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/install-deps
+      - run: pnpm changeset version --snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: pnpm install --lockfile-only
+      - run: pnpm ts-node-esm scripts/replace-exact-workspace-version.mts
+      - run: pnpm run build
+        env:
+          DENO_BUILD_PROD: "1"
+      - run: pnpm changeset publish --tag snapshot --no-git-tag
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

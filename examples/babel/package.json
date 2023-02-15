@@ -1,0 +1,15 @@
+{
+  "name": "@kosko-example/babel",
+  "version": "0.0.15",
+  "private": true,
+  "dependencies": {
+    "@kosko/env": "workspace:^",
+    "kosko": "workspace:^",
+    "kubernetes-models": "^4.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
+    "@babel/register": "^7.18.9"
+  }
+}

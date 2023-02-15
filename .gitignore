@@ -1,0 +1,24 @@
+node_modules/
+/.idea/
+/.vscode/
+dist/
+out/
+tmp/
+/coverage/
+*.log
+*.tsbuildinfo
+
+# Local Netlify folder
+.netlify
+
+# pnpm store dir on GitHub actions
+/.pnpm-store/
+
+# Rollup
+.rollup.cache
+
+# Turbo
+.turbo
+
+# Deno integration tests
+/integration/deno-import-map.json

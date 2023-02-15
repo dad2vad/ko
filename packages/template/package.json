@@ -1,0 +1,54 @@
+{
+  "name": "@kosko/template",
+  "version": "3.0.1",
+  "description": "Utilities for kosko templates.",
+  "homepage": "https://kosko.dev",
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/template",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "dist/index.node.cjs",
+  "module": "dist/index.node.mjs",
+  "types": "dist/types.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "build-scripts"
+  },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "deno": "./dist/index.deno.mjs",
+    "node": {
+      "import": "./dist/index.node.mjs",
+      "require": "./dist/index.node.cjs"
+    },
+    "import": "./dist/index.base.mjs",
+    "require": "./dist/index.node.cjs"
+  },
+  "files": [
+    "/dist/"
+  ],
+  "keywords": [
+    "kosko"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=14.18.0"
+  },
+  "dependencies": {
+    "@kosko/log": "workspace:^",
+    "exit": "^0.1.2",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@kosko/build-scripts": "workspace:^",
+    "@kosko/jest-preset": "workspace:^",
+    "@kosko/test-utils": "workspace:^",
+    "@types/exit": "^0.1.31",
+    "@types/yargs": "^17.0.12",
+    "execa": "^5.1.1"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
+  }
+}

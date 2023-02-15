@@ -1,0 +1,33 @@
+{
+  "name": "kosko",
+  "version": "3.0.3",
+  "description": "Organize Kubernetes manifests in JavaScript.",
+  "homepage": "https://kosko.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tommy351/kosko.git"
+  },
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "bin": {
+    "kosko": "bin/kosko.mjs"
+  },
+  "files": [
+    "/bin/",
+    "/lib/"
+  ],
+  "keywords": [
+    "kubernetes",
+    "kosko"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=14.18.0"
+  },
+  "dependencies": {
+    "@kosko/cli": "workspace:*",
+    "import-local": "^3.1.0"
+  }
+}

@@ -1,0 +1,357 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`migrate given a CRD should export an array containing a CRD 1`] = `
+[
+  {
+    "apiVersion": "networking.istio.io/v1alpha3",
+    "kind": "VirtualService",
+    "metadata": {
+      "name": "details",
+    },
+  },
+]
+`;
+
+exports[`migrate given a CRD should generate code 1`] = `
+""use strict";
+
+
+const virtualService = {
+  "apiVersion": "networking.istio.io/v1alpha3",
+  "kind": "VirtualService",
+  "metadata": {
+    "name": "details"
+  }
+};
+
+module.exports = [virtualService];
+"
+`;
+
+exports[`migrate given a List should export an array containing items in the list 1`] = `
+[
+  {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+      "name": "test-deployment",
+    },
+    "spec": {
+      "replicas": 2,
+    },
+  },
+  {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": {
+      "name": "test-service",
+    },
+    "spec": {
+      "selector": {},
+    },
+  },
+]
+`;
+
+exports[`migrate given a List should generate code 1`] = `
+""use strict";
+
+const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
+const { Service } = require("kubernetes-models/v1/Service");
+
+const deployment = new Deployment({
+  "metadata": {
+    "name": "test-deployment"
+  },
+  "spec": {
+    "replicas": 2
+  }
+});
+
+const service = new Service({
+  "metadata": {
+    "name": "test-service"
+  },
+  "spec": {
+    "selector": {}
+  }
+});
+
+module.exports = [deployment, service];
+"
+`;
+
+exports[`migrate given a RBAC ClusterRoleBinding should export an array containing a ClusterRoleBinding 1`] = `
+[
+  {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": {
+      "name": "tiller",
+    },
+  },
+]
+`;
+
+exports[`migrate given a RBAC ClusterRoleBinding should generate code 1`] = `
+""use strict";
+
+const { ClusterRoleBinding } = require("kubernetes-models/rbac.authorization.k8s.io/v1/ClusterRoleBinding");
+
+const clusterRoleBinding = new ClusterRoleBinding({
+  "metadata": {
+    "name": "tiller"
+  }
+});
+
+module.exports = [clusterRoleBinding];
+"
+`;
+
+exports[`migrate given multiple manifests of different kinds should export an array containing a deployment and a service 1`] = `
+[
+  {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+      "name": "test-deployment",
+    },
+    "spec": {
+      "replicas": 2,
+    },
+  },
+  {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": {
+      "name": "test-service",
+    },
+    "spec": {
+      "selector": {},
+    },
+  },
+]
+`;
+
+exports[`migrate given multiple manifests of different kinds should generate code 1`] = `
+""use strict";
+
+const { Deployment } = require("kubernetes-models/apps/v1/Deployment");
+const { Service } = require("kubernetes-models/v1/Service");
+
+const deployment = new Deployment({
+  "metadata": {
+    "name": "test-deployment"
+  },
+  "spec": {
+    "replicas": 2
+  }
+});
+
+const service = new Service({
+  "metadata": {
+    "name": "test-service"
+  },
+  "spec": {
+    "selector": {}
+  }
+});
+
+module.exports = [deployment, service];
+"
+`;
+
+exports[`migrate given multiple manifests of same kind should export an array containing three config maps 1`] = `
+[
+  {
+    "apiVersion": "v1",
+    "data": {
+      "foo": "bar",
+    },
+    "kind": "ConfigMap",
+    "metadata": {
+      "name": "config-foo",
+    },
+  },
+  {
+    "apiVersion": "v1",
+    "data": {
+      "bar": "baz",
+    },
+    "kind": "ConfigMap",
+    "metadata": {
+      "name": "config-bar",
+    },
+  },
+  {
+    "apiVersion": "v1",
+    "data": {
+      "baz": "boo",
+    },
+    "kind": "ConfigMap",
+    "metadata": {
+      "name": "config-baz",
+    },
+  },
+]
+`;
+
+exports[`migrate given multiple manifests of same kind should generate code 1`] = `
+""use strict";
+
+const { ConfigMap } = require("kubernetes-models/v1/ConfigMap");
+
+const configMap = new ConfigMap({
+  "metadata": {
+    "name": "config-foo"
+  },
+  "data": {
+    "foo": "bar"
+  }
+});
+
+const configMap1 = new ConfigMap({
+  "metadata": {
+    "name": "config-bar"
+  },
+  "data": {
+    "bar": "baz"
+  }
+});
+
+const configMap2 = new ConfigMap({
+  "metadata": {
+    "name": "config-baz"
+  },
+  "data": {
+    "baz": "boo"
+  }
+});
+
+module.exports = [configMap, configMap1, configMap2];
+"
+`;
+
+exports[`migrate given no manifests should generate code 1`] = `
+""use strict";
+
+
+module.exports = [];
+"
+`;
+
+exports[`migrate given single manifest should export an array containing a pod 1`] = `
+[
+  {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+      "name": "test-pod",
+    },
+    "spec": {
+      "containers": [],
+    },
+  },
+]
+`;
+
+exports[`migrate given single manifest should generate code 1`] = `
+""use strict";
+
+const { Pod } = require("kubernetes-models/v1/Pod");
+
+const pod = new Pod({
+  "metadata": {
+    "name": "test-pod"
+  },
+  "spec": {
+    "containers": []
+  }
+});
+
+module.exports = [pod];
+"
+`;
+
+exports[`migrate when format = ESM should generate code in ESM format 1`] = `
+"import { Pod } from "kubernetes-models/v1/Pod";
+
+const pod = new Pod({
+  "metadata": {
+    "name": "test-pod"
+  },
+  "spec": {
+    "containers": []
+  }
+});
+
+export default [pod];
+"
+`;
+
+exports[`migrateString given empty objects in YAML should ignore them 1`] = `
+""use strict";
+
+const { Pod } = require("kubernetes-models/v1/Pod");
+
+const pod = new Pod({
+  "metadata": {
+    "name": "test-pod"
+  }
+});
+
+module.exports = [pod];
+"
+`;
+
+exports[`migrateString given valid JSON should generate code 1`] = `
+""use strict";
+
+const { Pod } = require("kubernetes-models/v1/Pod");
+
+const pod = new Pod({
+  "metadata": {
+    "name": "test-pod"
+  },
+  "spec": {
+    "containers": []
+  }
+});
+
+module.exports = [pod];
+"
+`;
+
+exports[`migrateString given valid YAML should generate code 1`] = `
+""use strict";
+
+const { Pod } = require("kubernetes-models/v1/Pod");
+
+const pod = new Pod({
+  "metadata": {
+    "name": "test-pod"
+  },
+  "spec": {
+    "containers": []
+  }
+});
+
+module.exports = [pod];
+"
+`;
+
+exports[`migrateString when format = ESM should generate code in ESM format 1`] = `
+"import { Pod } from "kubernetes-models/v1/Pod";
+
+const pod = new Pod({
+  "metadata": {
+    "name": "test-pod"
+  },
+  "spec": {
+    "containers": []
+  }
+});
+
+export default [pod];
+"
+`;

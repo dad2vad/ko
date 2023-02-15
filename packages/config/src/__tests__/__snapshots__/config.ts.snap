@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loadConfig when file exists should load the config 1`] = `
+{
+  "bail": true,
+  "baseEnvironment": "m",
+  "components": [
+    "b",
+    "c",
+  ],
+  "environments": {
+    "dev": {
+      "components": [
+        "f",
+        "g",
+      ],
+      "loaders": [
+        "p",
+        "q",
+      ],
+      "require": [
+        "d",
+        "e",
+      ],
+    },
+    "prod": {
+      "components": [
+        "i",
+        "j",
+      ],
+      "loaders": [
+        "r",
+        "s",
+      ],
+      "require": [
+        "h",
+      ],
+    },
+  },
+  "extensions": [
+    "js",
+    "json",
+  ],
+  "loaders": [
+    "n",
+    "o",
+  ],
+  "paths": {
+    "environment": {
+      "component": "l",
+      "global": "k",
+    },
+  },
+  "require": [
+    "a",
+  ],
+}
+`;
+
+exports[`searchConfig should return the config when kosko.toml exists 1`] = `
+{
+  "bail": true,
+  "baseEnvironment": "m",
+  "components": [
+    "b",
+    "c",
+  ],
+  "environments": {
+    "dev": {
+      "components": [
+        "f",
+        "g",
+      ],
+      "loaders": [
+        "p",
+        "q",
+      ],
+      "require": [
+        "d",
+        "e",
+      ],
+    },
+    "prod": {
+      "components": [
+        "i",
+        "j",
+      ],
+      "loaders": [
+        "r",
+        "s",
+      ],
+      "require": [
+        "h",
+      ],
+    },
+  },
+  "extensions": [
+    "js",
+    "json",
+  ],
+  "loaders": [
+    "n",
+    "o",
+  ],
+  "paths": {
+    "environment": {
+      "component": "l",
+      "global": "k",
+    },
+  },
+  "require": [
+    "a",
+  ],
+}
+`;

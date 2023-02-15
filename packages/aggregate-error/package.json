@@ -1,0 +1,49 @@
+{
+  "name": "@kosko/aggregate-error",
+  "version": "0.2.0",
+  "description": "AggregateError polyfill.",
+  "homepage": "https://kosko.dev",
+  "repository": "https://github.com/tommy351/kosko/tree/master/packages/aggregate-error",
+  "author": "Tommy Chen <tommy351@gmail.com>",
+  "license": "MIT",
+  "main": "index.node.cjs",
+  "module": "index.node.mjs",
+  "browser": "index.browser.mjs",
+  "types": "index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "index.d.ts",
+    "index.browser.mjs",
+    "index.node.cjs",
+    "index.node.mjs"
+  ],
+  "exports": {
+    "types": "./index.d.ts",
+    "node": {
+      "import": "./index.node.mjs",
+      "require": "./index.node.cjs"
+    },
+    "import": "./index.browser.mjs",
+    "require": "./index.node.cjs"
+  },
+  "scripts": {
+    "build": "build-scripts"
+  },
+  "keywords": [
+    "kosko"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=14.18.0"
+  },
+  "devDependencies": {
+    "@kosko/build-scripts": "workspace:^",
+    "@kosko/jest-preset": "workspace:^"
+  },
+  "jest": {
+    "preset": "@kosko/jest-preset"
+  }
+}
