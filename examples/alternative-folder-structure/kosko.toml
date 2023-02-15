@@ -1,4 +1,0 @@
-components = ["*"]
-
-[paths.environment]
-component = "components/#{component}/#{environment}"

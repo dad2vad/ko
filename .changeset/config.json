@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@1.5.0/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "tommy351/kosko" }],
+  "changelog": ["@changesets/changelog-github", { "repo": "dad2vad/ko" }],
   "commit": false,
   "linked": [["@kosko/cli", "kosko"]],
   "access": "public",
